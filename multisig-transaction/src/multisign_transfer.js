@@ -24,7 +24,7 @@ program
     .option('--expiration <unix_timestamp>', 'transaction is discarded if it is not executed before expiration timestamp')
     .action(async () => {
         const options = program.opts();
-        const max_gas = parseInt(options.max_gas) < 4000000n ? parseInt(options.max_gas): 4000000n;
+        const max_gas = 5000;
         const private_key_bytes = new HexString(options.private_key).toUint8Array();
         const sign_account = new AptosAccount(private_key_bytes);
         let chain_id = 0;
@@ -96,7 +96,7 @@ program
             // Max gas unit to spend
             max_gas,
             // Gas price per unit
-            1n,
+            1000n,
             // Expiration timestamp. Transaction is discarded if it is not executed within 1 hour from now.
             BigInt(expiration),
             new TxnBuilderTypes.ChainId(chain_id),
